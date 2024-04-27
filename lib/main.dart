@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:syllabusapp/screens/branches.dart';
 import 'package:syllabusapp/screens/splashpage.dart';
 import 'package:syllabusapp/screens/universitylist.dart';
 
@@ -17,6 +18,10 @@ class MyApp extends StatelessWidget{
 
       home: SplashPage(),
       //home: UniversityList(),
+
+      routes: {
+        'branchDetails' : (context) => Branches()
+      },
 
     );
   }

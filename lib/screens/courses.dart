@@ -21,21 +21,27 @@ class Courses extends StatelessWidget {
       body: ListView.builder(
           itemCount: courses.length,
           itemBuilder: (context,index){
-            return Card(
+            return InkWell(
 
-              color: MyColors.backGround,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: ListTile(
-                  leading: Icon(Icons.school),
-                  title: Text(courses[index],
-                    style: MyTexts.optiontext),
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Branches()));
-                    },
+              onTap: () => Navigator.pushNamed(
+                context,
+                'branchDetails',
+                arguments: index ),
+
+              child: Card(
+
+                color: MyColors.backGround,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ListTile(
+                    leading: Icon(Icons.school),
+                    title: Text(courses[index],
+                      style: MyTexts.optiontext),
+
+                  ),
                 ),
-              ),
 
+              ),
             );
           }),
     );

@@ -4,25 +4,19 @@ import 'package:syllabusapp/screens/semesterlist.dart';
 import 'package:syllabusapp/screens/utils/mycolors.dart';
 import 'package:syllabusapp/screens/utils/mytexts.dart';
 
+import '../model/branchlist.dart';
+
 class Branches extends StatelessWidget {
 
-  List branches = [
-    "Electronics and Communication",
-    "Electrical and Electronics",
-    "Mechanical Engineering",
-    "Civil Engineering",
-    "Computer Science",
-    "Industrial Engineering",
-    "Applied Electronics and Instrumentation",
-    "Chemical Engineering",
-    "Aerospace Engineering"
-    "Information Technology",
-    "Biotechnology"
 
-  ];
+late BranchList branchlist;
 
   @override
   Widget build(BuildContext context) {
+
+    final index = ModalRoute.of(context)?.settings.arguments as int;
+    branchlist = branches[index];
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: MyColors.appbarcolor,
@@ -31,7 +25,7 @@ class Branches extends StatelessWidget {
         ),
       ),
       body: ListView.builder(
-          itemCount: branches.length,
+          itemCount: branchlist.l,
           itemBuilder: (context,index){
             return Card(
 
@@ -40,7 +34,7 @@ class Branches extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: ListTile(
                   leading: Icon(Icons.library_books),
-                  title: Text(branches[index],
+                  title: Text(branchlist.bracnches2[index],
                     style: MyTexts.optiontext),
                   onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>Semester()));
