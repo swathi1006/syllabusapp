@@ -1,6 +1,5 @@
 class BranchList{
 
-
   List<String> bracnches2;
   int? l;
 

@@ -4,14 +4,18 @@ import 'package:syllabusapp/screens/subjects.dart';
 import 'package:syllabusapp/screens/utils/mycolors.dart';
 import 'package:syllabusapp/screens/utils/mytexts.dart';
 
+import '../model/semlist.dart';
+
 class Semester extends StatelessWidget {
 
-  List sem = [
-    "1","2","3","4","5","6","7","8"
-  ];
+  late SemList semesterlistobj;
 
   @override
   Widget build(BuildContext context) {
+
+    final index = ModalRoute.of(context)?.settings.arguments as int;
+    semesterlistobj = semesters[index];
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: MyColors.appbarcolor,
@@ -21,23 +25,30 @@ class Semester extends StatelessWidget {
       ),
 
       body: ListView.builder(
-          itemCount: sem.length,
+          itemCount: semesterlistobj.l,
           itemBuilder: (context,index){
-            return Card(
-
-              color: MyColors.backGround,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: ListTile(
-                  leading: Icon(Icons.library_books),
-                  title: Text(sem[index],
-                    style: MyTexts.bodytext),
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Subjects()));
-                  },
-                ),
+            return InkWell(
+              onTap: () => Navigator.pushNamed(
+                  context,
+                  "subjectDetails",
+                  arguments: index
               ),
 
+
+              child: Card(
+
+                color: MyColors.backGround,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ListTile(
+                    leading: Icon(Icons.library_books),
+                    title: Text(semesterlistobj.Sems[index],
+                      style: MyTexts.bodytext),
+
+                  ),
+                ),
+
+              ),
             );
           }),
     );

@@ -27,21 +27,28 @@ late BranchList branchlist;
       body: ListView.builder(
           itemCount: branchlist.l,
           itemBuilder: (context,index){
-            return Card(
+            return InkWell(
 
-              color: MyColors.backGround,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: ListTile(
-                  leading: Icon(Icons.library_books),
-                  title: Text(branchlist.bracnches2[index],
-                    style: MyTexts.optiontext),
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Semester()));
-                  },
-                ),
+              onTap: () => Navigator.pushNamed(
+                  context,
+                  'semDetails',
+                arguments: index
               ),
 
+              child: Card(
+
+                color: MyColors.backGround,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ListTile(
+                    leading: Icon(Icons.library_books),
+                    title: Text(branchlist.bracnches2[index],
+                      style: MyTexts.optiontext),
+
+                  ),
+                ),
+
+              ),
             );
           }),
     );
