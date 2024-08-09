@@ -3,13 +3,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:syllabusapp/screens/branches.dart';
 import 'package:syllabusapp/screens/utils/mycolors.dart';
 import 'package:syllabusapp/screens/utils/mytexts.dart';
+import 'package:syllabusapp/model/data.dart';
 
 class Courses extends StatelessWidget {
-  List courses = [
+
+ /* List courses = [
     "B.Tech",
     "B.Arch",
     "B.Des"
   ];
+
+  */
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,27 +25,25 @@ class Courses extends StatelessWidget {
       body: ListView.builder(
           itemCount: courses.length,
           itemBuilder: (context,index){
-            return InkWell(
+            return Card(
+              color: MyColors.backGround,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: ListTile(
+                  leading: Icon(Icons.school),
+                  title: Text(courses[index].name,
+                    style: MyTexts.optiontext),
+                  onTap: () {
 
-              onTap: () => Navigator.pushNamed(
-                context,
-                'branchDetails',
-                arguments: index ),
+                    Navigator.push( context,
+                      MaterialPageRoute(
+                        builder: (context) => Branches(courses[index]),
+                      ), );
 
-              child: Card(
-
-                color: MyColors.backGround,
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: ListTile(
-                    leading: Icon(Icons.school),
-                    title: Text(courses[index],
-                      style: MyTexts.optiontext),
-
-                  ),
+                  },
                 ),
-
               ),
+
             );
           }),
     );

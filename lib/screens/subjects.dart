@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:syllabusapp/model/subjectlist.dart';
 import 'package:syllabusapp/screens/syllabus.dart';
 import 'package:syllabusapp/screens/utils/mycolors.dart';
 import 'package:syllabusapp/screens/utils/mytexts.dart';
 
+import '../model/data.dart';
+import 'detailedSyllabus.dart';
+import 'electives.dart';
+
 class Subjects extends StatelessWidget {
 
-late SubjectList subjects2;
+//late SubjectList subjects2;
+  final Semester semester;
+  final String docname;
+
+  Subjects(this.semester,this.docname);
 
   @override
   Widget build(BuildContext context) {
-
-    final index = ModalRoute.of(context)?.settings.arguments as int;
-    subjects2 = subjects[index];
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: MyColors.appbarcolor,
@@ -22,21 +25,36 @@ late SubjectList subjects2;
           style: MyTexts.title),
       ),
       body: ListView.builder(
-          itemCount: subjects2.l,
+          itemCount: semester.subjects.length,
           itemBuilder: (context,index){
             return Padding(
               padding: const EdgeInsets.only(left: 10.0,right: 10.0,top: 5,bottom: 5),
               child: Card(
-
                 color: MyColors.backGround,
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: ListTile(
-                    leading: Icon(Icons.library_books),
-                    title: Text(subjects2.allsubject[index],
+                    leading: const Icon(Icons.library_books),
+                    title: Text(semester.subjects[index].name,
                       style: MyTexts.optiontext),
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Syllabus()));
+                    //  Navigator.push(context, MaterialPageRoute(builder: (context)=>Syllabus()));
+                      if (semester.subjects[index].electives != null && semester.subjects[index].electives!.isNotEmpty){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Electives(semester.subjects[index].electives!),
+                          ),
+                        );
+                      }else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SubjectDetailScreen(semester.subjects[index],semester.subjects[index].i!,semester.subcname!,docname),
+                          ),
+                        );
+                      }
+
                     },
                   ),
                 ),

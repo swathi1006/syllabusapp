@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:syllabusapp/screens/courses.dart';
 import 'package:syllabusapp/screens/universitylist.dart';
 import 'package:syllabusapp/screens/utils/mycolors.dart';
 import 'package:syllabusapp/screens/utils/mytexts.dart';
@@ -12,7 +13,7 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     Timer(Duration(seconds: 6), () {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>UniversityList()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Courses()));
     });
 
     return  Scaffold(
